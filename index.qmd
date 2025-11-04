@@ -139,7 +139,7 @@ TODO: Report the probability estimate and interpret its practical meaning.
 
 ```
 
-### 5) Modified Strategy (Bet Exactly 50% Each Round)
+### 5) Modified Strategy (Bet Exactly 25% Each Round)
 
 Instead of having the full balance at risk with each coin flip, assume only 25% of your balance is gambled each year. Compare this to the original game. Which is riskier? Which has better upside?
 
