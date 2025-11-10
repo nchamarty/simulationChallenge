@@ -499,9 +499,11 @@ plt.show()
 
 2. Most of the bars are colored red, indicating that a significant majority of the simulations resulted in a final balance below the initial $30,000 investment
 
-3. The gray dotted line indicates initial investment of $30,000. The orange dashed line reeprsenting the mean final balance $57,497.89 is considerably higher than the purple dashed line for the median balance ($4,052.56). This wide gap between the mean and median indicates that while a few simulations might have yielded very high returns (pulling up the mean), the typical (median) outcome was quite low, and often a loss.
+3. The gray dotted line indicates initial investment of $30,000. The orange dashed line reeprsenting the **mean final balance $57,497.89** is considerably higher than the purple dashed line for the **median balance ($4,052.56)**. This wide gap between the mean and median indicates that while a few simulations might have yielded very high returns (pulling up the mean), the typical (median) outcome was quite low, and often a loss.
 
-4. **Conclusion:** This distribution highlights the high risk and volatility of betting 100% of your wealth each round. Most scenarios ended poorly, with only a small chance of significant gains.
+4. The probability of finishing above $30,000 is **0.220** which means that only about 22% of scenarios finish ahead, so the dominant outcome is a loss even though rare windfalls exist.
+
+5. **Conclusion:** This distribution highlights the high risk and volatility of betting 100% of your wealth each round. Most scenarios ended poorly, with only a small chance of significant gains.
 
 #### Right Histogram (25% Bet Strategy):
 
@@ -511,7 +513,9 @@ plt.show()
 
 3. The gray dotted line indicates initial investment of $30,000. The orange dashed line reeprsenting the mean final balance  $53,804.33  and the median final balance $47,482.86 represented by purple dashed line  are much closer together. The mean and median final balances both are significantly higher than the initial investment. The median is also now above the initial investment. 
 
-4. **Conclusion:** This distribution demonstrates that by betting a fixed 25% of your wealth, the strategy offers a more favorable risk-reward profile over the long term. It leads to a higher probability of positive outcomes and a better overall wealth accumulation, with less extreme downside risk compared to the 100% betting approach.
+4. The probability of finishing above $30,000 is **0.700** which means that about 70% of scenarios finish ahead, so the dominant outcome is a gain even though rare losses exist.
+
+5. **Conclusion:** This distribution demonstrates that by betting a fixed 25% of your wealth, the strategy offers a more favorable risk-reward profile over the long term. It leads to a higher probability of positive outcomes and a better overall wealth accumulation, with less extreme downside risk compared to the 100% betting approach.
 
 ### 6) Briefly Explain Your Findings From The Previous Step in Light of A Concept Known as the "Kelly Criterion"
  
