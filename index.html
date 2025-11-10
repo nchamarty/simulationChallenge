@@ -112,7 +112,7 @@ Heads: W1 = 1.5 × $30,000 = $45,000.00
 Final winnings after 1 flip: $45,000.00
 Net change: $15,000.00 (+50.00%)</code></pre>
 </div>
-<div id="q1-expected-value-py" class="cell-output cell-output-display" data-execution_count="10">
+<div id="q1-expected-value-py" class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
 
@@ -187,7 +187,7 @@ P(final &gt; $30,000):        0.220 (22.0%)
 <div class="cell-output cell-output-display">
 <div id="q3-dist-100-py" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="index_files/figure-html/q3-dist-100-py-output-2.png" width="670" height="470" class="figure-img"></p>
+<p><img src="index_files/figure-html/q3-dist-100-py-output-2.png" width="687" height="470" class="figure-img"></p>
 <figcaption>Distribution of final balances across 100 simulations</figcaption>
 </figure>
 </div>
@@ -243,7 +243,7 @@ P(final &gt; $30,000):        0.700 (70.0%)
 <div class="cell-output cell-output-display">
 <div id="q5-modified-25pct-py" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="index_files/figure-html/q5-modified-25pct-py-output-2.png" width="694" height="461" class="figure-img"></p>
+<p><img src="index_files/figure-html/q5-modified-25pct-py-output-2.png" width="661" height="459" class="figure-img"></p>
 <figcaption>Modified strategy distribution (bet 25% each round)</figcaption>
 </figure>
 </div>
@@ -277,7 +277,7 @@ P(final &gt; $30,000):        0.700 (70.0%)
 <p>In our simulation:</p>
 <p>The probability of winning (p) is 0.5 (coin flip). The probability of losing (q) is also 0.5. When we win, we gain 50% of the bet, so for every $1 bet, we get $0.50 profit, meaning b = 0.5. When we lose, we lose 40% of the bet, which is a loss of $0.40 every $1 bet. Let’s apply the Kelly Criterion to our scenario: f = ( (0.5 * 0.5) - 0.5 ) / 0.5 f = (0.25 - 0.5) / 0.5 f = -0.25 / 0.5 f = -0.5</p>
 <p>The negative result suggests that, given these exact parameters (1.5x on win, 0.6x on loss, 50/50 probability), a full Kelly strategy would actually advise not betting, or even shorting (which isn’t really applicable here). This is because the expected value of the bet (p * gain) - (q * loss) is (0.5 * 0.5) - (0.5 * 0.4) = 0.25 - 0.2 = 0.05, which is positive, but the structure of the bet (specifically the return ‘b’) makes the standard Kelly formula yield a negative result when the loss is a higher percentage of the bet than the gain.</p>
-<p>The key takeaway from Kelly is that you should bet a fraction of your wealth, not all of it, to avoid ruin and maximize long-term growth. Betting 50% of your wealth (bet_percentage = 0.5) in our modified strategy is a form of fractional Kelly or a prudent fixed-fraction betting strategy, which aims to balance risk and reward. It’s a pragmatic approach to manage risk, even if the strict Kelly formula might suggest a different optimal fraction or even no bet at all under certain conditions. The significant improvement in the median and probability of success in our 50% strategy compared to the 100% strategy highlights the benefit of not risking your entire capital on each independent event over a long series of trials. This is why we see a significant improvement in the median and probability of success in our 50% strategy compared to the 100% strategy.</p>
+<p>The key takeaway from Kelly is that you should bet a fraction of your wealth, not all of it, to avoid ruin and maximize long-term growth. Betting 25% of your wealth (bet_percentage = 0.25) in our modified strategy is a form of fractional Kelly or a prudent fixed-fraction betting strategy, which aims to balance risk and reward. It’s a pragmatic approach to manage risk, even if the strict Kelly formula might suggest a different optimal fraction or even no bet at all under certain conditions. The significant improvement in the median and probability of success in our 25% strategy compared to the 100% strategy highlights the benefit of not risking your entire capital on each independent event over a long series of trials. This is why we see a significant improvement in the median and probability of success in our 25% strategy compared to the 100% strategy.</p>
 </section>
 </section>
 

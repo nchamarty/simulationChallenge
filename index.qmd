@@ -284,8 +284,8 @@ ax.axvline(x=W0, color='darkblue', linestyle='--', linewidth=3,
            label=f'Initial Investment (${W0:,})', zorder=5, alpha=0.9)
 
 # Formatting
-ax.set_xlabel('Final Account Balance ($)', fontsize=12, fontweight='bold')
-ax.set_ylabel('Frequency (Number of Simulations)', fontsize=12, fontweight='bold')
+ax.set_xlabel('Final Account Balance ($)', fontsize=10, fontweight='bold')
+ax.set_ylabel('Frequency (Number of Simulations)', fontsize=10, fontweight='bold')
 ax.set_title(f'Distribution of Final Balances: {n_simulations} Simulations Over {years} Years', 
              fontsize=14, fontweight='bold')
 ax.grid(True, alpha=0.3, linestyle='--', axis='y')
@@ -299,7 +299,7 @@ ax.xaxis.set_major_formatter(FuncFormatter(lambda x, p: f'${x:,.0f}'))
 x_min = max(0, min_final * 0.9)
 x_max = max_final * 1.1
 ax.set_xlim(x_min, x_max)
-
+plt.setp(ax.get_xticklabels(), rotation=30, ha="right", rotation_mode="anchor")
 # Set custom tick locations to avoid exponential notation
 # Calculate reasonable tick locations
 tick_range = x_max - x_min
@@ -324,8 +324,8 @@ ax.xaxis.set_major_formatter(FuncFormatter(lambda x, p: f'${x:,.0f}' if x >= 0 e
 
 # Add text box with key statistics
 stats_text = f'Mean: ${mean_final:,.0f}\nMedian: ${median_final:,.0f}\nP(>${W0:,}): {prob_above_initial:.3f}'
-ax.text(0.98, 0.98, stats_text, transform=ax.transAxes, 
-        fontsize=11, verticalalignment='top', horizontalalignment='right',
+ax.text(0.98, 0.85, stats_text, transform=ax.transAxes, 
+        fontsize=8, verticalalignment='top', horizontalalignment='right',
         bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.9),
         fontweight='bold')
 
@@ -456,10 +456,11 @@ for i, (bar, bin_left) in enumerate(zip(patches, bins[:-1])):
     else:
         bar.set_facecolor('red')
         bar.set_alpha(0.6)
-ax1.set_title(f'100% Bet Strategy ({n_simulations} Simulations)', fontsize=14)
-ax1.set_xlabel('Final Balance', fontsize=12)
-ax1.set_ylabel('Frequency', fontsize=12)
+ax1.set_title(f'100% Bet Strategy ({n_simulations} Simulations)', fontsize=6)
+ax1.set_xlabel('Final Balance', fontsize=6)
+ax1.set_ylabel('Frequency', fontsize=6)
 ax1.xaxis.set_major_formatter(FuncFormatter(lambda x, p: f'${x:,.0f}'))
+plt.setp(ax1.get_xticklabels(), rotation=30, ha="right", rotation_mode="anchor")
 ax1.axvline(mean_original, color='orange', linestyle='dashed', linewidth=2, label=f'Mean: ${mean_original:,.0f}')
 ax1.axvline(median_original, color='purple', linestyle='dashed', linewidth=2, label=f'Median: ${median_original:,.0f}')
 ax1.axvline(W0, color='gray', linestyle='dotted', linewidth=2, label=f'Initial: ${W0:,.0f}')
@@ -477,16 +478,17 @@ for i, (bar, bin_left) in enumerate(zip(patches, bins[:-1])):
     else:
         bar.set_facecolor('red')
         bar.set_alpha(0.6)
-ax2.set_title(f'25% Bet Strategy ({n_simulations} Simulations)', fontsize=14)
-ax2.set_xlabel('Final Balance', fontsize=12)
+ax2.set_title(f'25% Bet Strategy ({n_simulations} Simulations)', fontsize=6)
+ax2.set_xlabel('Final Balance', fontsize=6)
 ax2.xaxis.set_major_formatter(FuncFormatter(lambda x, p: f'${x:,.0f}'))
+plt.setp(ax2.get_xticklabels(), rotation=30, ha="right", rotation_mode="anchor")
 ax2.axvline(mean_modified, color='orange', linestyle='dashed', linewidth=2, label=f'Mean: ${mean_modified:,.0f}')
 ax2.axvline(median_modified, color='purple', linestyle='dashed', linewidth=2, label=f'Median: ${median_modified:,.0f}')
 ax2.axvline(W0, color='gray', linestyle='dotted', linewidth=2, label=f'Initial: ${W0:,.0f}')
 ax2.legend()
 ax2.grid(axis='y', alpha=0.75)
 
-plt.suptitle(f'Comparison of Betting Strategies After {years} Years', fontsize=16)
+plt.suptitle(f'Comparison of Betting Strategies After {years} Years', fontsize=14)
 plt.tight_layout(rect=[0, 0.03, 1, 0.95]) # Adjust layout to prevent suptitle overlap
 plt.show()
 
@@ -533,4 +535,4 @@ Let's apply the Kelly Criterion to our scenario: f = ( (0.5 * 0.5) - 0.5 ) / 0.5
 
 The negative result suggests that, given these exact parameters (1.5x on win, 0.6x on loss, 50/50 probability), a full Kelly strategy would actually advise not betting, or even shorting (which isn't really applicable here). This is because the expected value of the bet (p * gain) - (q * loss) is (0.5 * 0.5) - (0.5 * 0.4) = 0.25 - 0.2 = 0.05, which is positive, but the structure of the bet (specifically the return 'b') makes the standard Kelly formula yield a negative result when the loss is a higher percentage of the bet than the gain.
 
-The key takeaway from Kelly is that you should bet a fraction of your wealth, not all of it, to avoid ruin and maximize long-term growth. Betting 50% of your wealth (bet_percentage = 0.5) in our modified strategy is a form of fractional Kelly or a prudent fixed-fraction betting strategy, which aims to balance risk and reward. It's a pragmatic approach to manage risk, even if the strict Kelly formula might suggest a different optimal fraction or even no bet at all under certain conditions. The significant improvement in the median and probability of success in our 50% strategy compared to the 100% strategy highlights the benefit of not risking your entire capital on each independent event over a long series of trials. This is why we see a significant improvement in the median and probability of success in our 50% strategy compared to the 100% strategy.
+The key takeaway from Kelly is that you should bet a fraction of your wealth, not all of it, to avoid ruin and maximize long-term growth. Betting 25% of your wealth (bet_percentage = 0.25) in our modified strategy is a form of fractional Kelly or a prudent fixed-fraction betting strategy, which aims to balance risk and reward. It's a pragmatic approach to manage risk, even if the strict Kelly formula might suggest a different optimal fraction or even no bet at all under certain conditions. The significant improvement in the median and probability of success in our 25% strategy compared to the 100% strategy highlights the benefit of not risking your entire capital on each independent event over a long series of trials. This is why we see a significant improvement in the median and probability of success in our 25% strategy compared to the 100% strategy.
