@@ -456,8 +456,8 @@ for i, (bar, bin_left) in enumerate(zip(patches, bins[:-1])):
     else:
         bar.set_facecolor('red')
         bar.set_alpha(0.6)
-ax1.set_title(f'100% Bet Strategy ({n_simulations} Simulations)', fontsize=6)
-ax1.set_xlabel('Final Balance', fontsize=6)
+ax1.set_title(f'100% Bet Strategy ({n_simulations} Simulations)', fontsize=8)
+ax1.set_xlabel('Final Balance', fontsize=8)
 ax1.set_ylabel('Frequency', fontsize=6)
 ax1.xaxis.set_major_formatter(FuncFormatter(lambda x, p: f'${x:,.0f}'))
 plt.setp(ax1.get_xticklabels(), rotation=30, ha="right", rotation_mode="anchor")
@@ -478,8 +478,8 @@ for i, (bar, bin_left) in enumerate(zip(patches, bins[:-1])):
     else:
         bar.set_facecolor('red')
         bar.set_alpha(0.6)
-ax2.set_title(f'25% Bet Strategy ({n_simulations} Simulations)', fontsize=6)
-ax2.set_xlabel('Final Balance', fontsize=6)
+ax2.set_title(f'25% Bet Strategy ({n_simulations} Simulations)', fontsize=8)
+ax2.set_xlabel('Final Balance', fontsize=8)
 ax2.xaxis.set_major_formatter(FuncFormatter(lambda x, p: f'${x:,.0f}'))
 plt.setp(ax2.get_xticklabels(), rotation=30, ha="right", rotation_mode="anchor")
 ax2.axvline(mean_modified, color='orange', linestyle='dashed', linewidth=2, label=f'Mean: ${mean_modified:,.0f}')
