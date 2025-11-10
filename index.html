@@ -112,7 +112,7 @@ Heads: W1 = 1.5 × $30,000 = $45,000.00
 Final winnings after 1 flip: $45,000.00
 Net change: $15,000.00 (+50.00%)</code></pre>
 </div>
-<div id="q1-expected-value-py" class="cell-output cell-output-display" data-execution_count="11">
+<div id="q1-expected-value-py" class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
 
@@ -138,9 +138,7 @@ Net change: $15,000.00 (+50.00%)</code></pre>
 </div>
 </div>
 </div>
-</section>
-<section id="since-the-coin-result-is-heads-after-first-flip-winnings-has-increased-to-45000-which-is-a-gain-of-50-from-original-value-of-30000.-this-suggests-that-it-may-be-profitable-to-buy-in-to-the-game" class="level3">
-<h3 class="anchored" data-anchor-id="since-the-coin-result-is-heads-after-first-flip-winnings-has-increased-to-45000-which-is-a-gain-of-50-from-original-value-of-30000.-this-suggests-that-it-may-be-profitable-to-buy-in-to-the-game">Since the coin result is Heads after first flip, Winnings has increased to $45,000 which is a gain of 50% from original value of $30,000. This suggests that it may be profitable to buy-in to the game</h3>
+<p><strong>Analysis</strong> : Since the coin result is Heads after first flip, Winnings has increased to $45,000 which is a gain of 50% from original value of $30,000. This suggests that it may be profitable to buy-in to the game</p>
 </section>
 <section id="single-simulation-over-time-narrative-plot" class="level3">
 <h3 class="anchored" data-anchor-id="single-simulation-over-time-narrative-plot">2) Single Simulation Over Time (Narrative + Plot)</h3>
@@ -219,38 +217,10 @@ P(final &gt; $30,000):        0.220 (22.0%)
 <p>A probability of 22.0% means that if we were to undertake this strategy many times, we would, on average, end up with more than your initial $30,000 in only about 22 out of every 100 instances. This indicates a high chance of losing money or ending up with less than your starting money, highlighting the significant risk associated with betting all your capital each round.</p>
 </section>
 </section>
-<section id="modified-strategy-bet-exactly-50-each-round" class="level3">
-<h3 class="anchored" data-anchor-id="modified-strategy-bet-exactly-50-each-round">5) Modified Strategy (Bet Exactly 50% Each Round)</h3>
-<p>Instead of having the full balance at risk with each coin flip, assume only 50% of your balance is gambled each year. Compare this to the original game. Which is riskier? Which has better upside?</p>
-<div id="cell-q5-modified-50pct-py" class="cell" data-execution_count="7">
-<div class="cell-output cell-output-stdout">
-<pre><code>======================================================================
-KEY STATISTICS: 100 Simulations Over 38 Years (50% Bet)
-======================================================================
-
-Mean final balance:     $63,856.86
-Median final balance:   $30,000.00
-P(final &gt; $30,000):        0.410 (41.0%)
-======================================================================</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div id="q5-modified-50pct-py" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/q5-modified-50pct-py-output-2.png" width="1143" height="663" class="figure-img"></p>
-<figcaption>Modified strategy distribution (bet 50% each round)</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<section id="interpretation-of-above-plot-after-changing-the-bet-strategy-to-50" class="level4">
-<h4 class="anchored" data-anchor-id="interpretation-of-above-plot-after-changing-the-bet-strategy-to-50"><strong>Interpretation of above plot after changing the bet strategy to 50%:</strong></h4>
-<ol type="1">
-<li><p>The gray dotted line at $30,000 shows the initial investment, serves as a stark dividing line.</p></li>
-<li><p>The median line now shifted to the right of $30,000 marked line which shows an improvement in the values of the outcome .</p></li>
-<li><p><strong>Mean final balance is $98,586.46</strong> and <strong>Median final balance $46,875.00</strong>. The mean and median final balances are much closer together are higher than the initial balance of $30,000. This indicates better profitability of outcomes as compared to previous 100% strtategy.</p></li>
-<li><p>The Probability of final balance being more than $30,000 is <strong>0.51 (51%)</strong>.</p></li>
-</ol>
-<div id="cell-q5-modified-50pct-comp-py" class="cell" data-execution_count="8">
+<section id="modified-strategy-bet-exactly-25-each-round" class="level3">
+<h3 class="anchored" data-anchor-id="modified-strategy-bet-exactly-25-each-round">5) Modified Strategy (Bet Exactly 25% Each Round)</h3>
+<p>Instead of having the full balance at risk with each coin flip, assume only 25% of your balance is gambled each year. Compare this to the original game. Which is riskier? Which has better upside?</p>
+<div id="cell-q5-modified-25pct-py" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-stdout">
 <pre><code>======================================================================
 KEY STATISTICS: 100 Simulations Over 38 Years (100% Bet)
@@ -262,40 +232,39 @@ P(final &gt; $30,000):        0.220 (22.0%)
 ======================================================================
 
 ======================================================================
-KEY STATISTICS: 100 Simulations Over 38 Years (50% Bet)
+KEY STATISTICS: 100 Simulations Over 38 Years (25% Bet)
 ======================================================================
 
-Mean final balance:     $98,586.46
-Median final balance:   $46,875.00
-P(final &gt; $30,000):        0.510 (51.0%)
+Mean final balance:     $53,804.33
+Median final balance:   $47,482.86
+P(final &gt; $30,000):        0.700 (70.0%)
 ======================================================================</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<div id="q5-modified-50pct-comp-py" class="quarto-figure quarto-figure-center anchored">
+<div id="q5-modified-25pct-py" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="index_files/figure-html/q5-modified-50pct-comp-py-output-2.png" width="1719" height="644" class="figure-img"></p>
-<figcaption>compare original and modified strategies</figcaption>
+<p><img src="index_files/figure-html/q5-modified-25pct-py-output-2.png" width="1719" height="644" class="figure-img"></p>
+<figcaption>Modified strategy distribution (bet 25% each round)</figcaption>
 </figure>
 </div>
 </div>
 </div>
-</section>
 <section id="left-histogram-100-bet-strategy" class="level4">
 <h4 class="anchored" data-anchor-id="left-histogram-100-bet-strategy">Left Histogram (100% Bet Strategy):</h4>
 <ol type="1">
 <li><p>This histogram shows a distribution heavily skewed towards the lower end of final balances.</p></li>
 <li><p>Most of the bars are colored red, indicating that a significant majority of the simulations resulted in a final balance below the initial $30,000 investment</p></li>
-<li><p>The gray dotted line indicates initial investment of $30,000. The orange dashed line reeprsenting the mean final balance $57,497.89 is considerably higher than the purple dashed line for the median balance ($57,497.89) is considerably higher than the purple dashed line for the median final balance ($4,052.56). This wide gap between the mean and median indicates that while a few simulations might have yielded very high returns (pulling up the mean), the typical (median) outcome was quite low, and often a loss.</p></li>
-<li><p><strong>Interpretation:</strong> This distribution highlights the high risk and volatility of betting 100% of your wealth each round. Most scenarios ended poorly, with only a small chance of significant gains.</p></li>
+<li><p>The gray dotted line indicates initial investment of $30,000. The orange dashed line reeprsenting the mean final balance $57,497.89 is considerably higher than the purple dashed line for the median balance ($4,052.56). This wide gap between the mean and median indicates that while a few simulations might have yielded very high returns (pulling up the mean), the typical (median) outcome was quite low, and often a loss.</p></li>
+<li><p><strong>Final Interpretation:</strong> This distribution highlights the high risk and volatility of betting 100% of your wealth each round. Most scenarios ended poorly, with only a small chance of significant gains.</p></li>
 </ol>
 </section>
-<section id="right-histogram-50-bet-strategy" class="level4">
-<h4 class="anchored" data-anchor-id="right-histogram-50-bet-strategy">Right Histogram (50% Bet Strategy):</h4>
+<section id="right-histogram-25-bet-strategy" class="level4">
+<h4 class="anchored" data-anchor-id="right-histogram-25-bet-strategy">Right Histogram (25% Bet Strategy):</h4>
 <ol type="1">
-<li><p>In contrast to 100% stratgey, this histogram plotted out of 50% bet strategy, displays a more spread-out and generally higher distribution of final balances.</p></li>
-<li><p>A larger portion of the bars are colored green, signifying that more simulations ended with a balance above the initial 30,000.</p></li>
-<li><p>The gray dotted line indicates initial investment of $30,000. The orange dashed line reeprsenting the mean final balance $98,586.46 and the median final balance 46,875.00 represented by purple dashed line are much closer together. The mean and median final balances both are significantly higher than the initial investment. The median is also now above the initial investment.</p></li>
-<li><p><strong>Interpretation:</strong> This distribution demonstrates that by betting a fixed 50% of your wealth, the strategy offers a more favorable risk-reward profile over the long term. It leads to a higher probability of positive outcomes and a better overall wealth accumulation, with less extreme downside risk compared to the 100% betting approach.</p></li>
+<li><p>In contrast to 100% stratgey, this histogram plotted out of 25% bet strategy, displays a more spread-out and generally higher distribution of final balances.</p></li>
+<li><p>A larger portion of the bars are colored green, signifying that more simulations ended with a balance above the initial $30,000.</p></li>
+<li><p>The gray dotted line indicates initial investment of $30,000. The orange dashed line reeprsenting the mean final balance $53,804.33 and the median final balance $47,482.86 represented by purple dashed line are much closer together. The mean and median final balances both are significantly higher than the initial investment. The median is also now above the initial investment.</p></li>
+<li><p><strong>Final Interpretation:</strong> This distribution demonstrates that by betting a fixed 25% of your wealth, the strategy offers a more favorable risk-reward profile over the long term. It leads to a higher probability of positive outcomes and a better overall wealth accumulation, with less extreme downside risk compared to the 100% betting approach.</p></li>
 </ol>
 </section>
 </section>
