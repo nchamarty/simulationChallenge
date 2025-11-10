@@ -163,7 +163,7 @@ print(f"Number of heads: {np.sum(coin_flips)} out of {years} flips")
 print(f"Number of tails: {years - np.sum(coin_flips)} out of {years} flips")
 
 # Create matplotlib OO time-series plot
-fig, ax = plt.subplots(figsize=(12, 6))
+fig, ax = plt.subplots(figsize=(7,5))
 
 # Plot the wealth over time
 ax.plot(time, wealth, linewidth=2, color='steelblue', marker='o', markersize=4)
@@ -263,7 +263,7 @@ print(f"P(final > ${W0:,}):        {prob_above_initial:.3f} ({prob_above_initial
 print("="*70)
 
 # Create matplotlib OO histogram plot
-fig, ax = plt.subplots(figsize=(12, 7))
+fig, ax = plt.subplots(figsize=(7, 5))
 
 # Create histogram
 n_bins = 30
@@ -420,7 +420,7 @@ for sim in range(n_simulations):
         retained_wealth = wealth_modified * (1 - bet_percentage)
         bet_amount = wealth_modified * bet_percentage
 
-        if coin_flips[i] == 1:  # Heads: bet gains 25%
+        if coin_flips[i] == 1:  # Heads: bet gains 50%
             bet_result = bet_amount * 1.5
         else:  # Tails: bet loses 40%
             bet_result = bet_amount * 0.6
@@ -440,7 +440,7 @@ print(f"P(final > ${W0:,}):        {prob_above_initial_modified:.3f} ({prob_abov
 print("="*70)
 
 # --- Visual Comparison Plot ---
-fig, axes = plt.subplots(1, 2, figsize=(18, 7), sharey=True) # Two subplots, shared y-axis
+fig, axes = plt.subplots(1, 2, figsize=(7, 5), sharey=True) # Two subplots, shared y-axis
 formatter = ScalarFormatter(useOffset=False)
 formatter.set_scientific(False)
 
@@ -499,7 +499,7 @@ plt.show()
 
 3. The gray dotted line indicates initial investment of $30,000. The orange dashed line reeprsenting the mean final balance $57,497.89 is considerably higher than the purple dashed line for the median balance ($4,052.56). This wide gap between the mean and median indicates that while a few simulations might have yielded very high returns (pulling up the mean), the typical (median) outcome was quite low, and often a loss.
 
-4. **Final Interpretation:** This distribution highlights the high risk and volatility of betting 100% of your wealth each round. Most scenarios ended poorly, with only a small chance of significant gains.
+4. **Conclusion:** This distribution highlights the high risk and volatility of betting 100% of your wealth each round. Most scenarios ended poorly, with only a small chance of significant gains.
 
 #### Right Histogram (25% Bet Strategy):
 
@@ -509,7 +509,7 @@ plt.show()
 
 3. The gray dotted line indicates initial investment of $30,000. The orange dashed line reeprsenting the mean final balance  $53,804.33  and the median final balance $47,482.86 represented by purple dashed line  are much closer together. The mean and median final balances both are significantly higher than the initial investment. The median is also now above the initial investment. 
 
-4. **Final Interpretation:** This distribution demonstrates that by betting a fixed 25% of your wealth, the strategy offers a more favorable risk-reward profile over the long term. It leads to a higher probability of positive outcomes and a better overall wealth accumulation, with less extreme downside risk compared to the 100% betting approach.
+4. **Conclusion:** This distribution demonstrates that by betting a fixed 25% of your wealth, the strategy offers a more favorable risk-reward profile over the long term. It leads to a higher probability of positive outcomes and a better overall wealth accumulation, with less extreme downside risk compared to the 100% betting approach.
 
 ### 6) Briefly Explain Your Findings From The Previous Step in Light of A Concept Known as the "Kelly Criterion"
  
