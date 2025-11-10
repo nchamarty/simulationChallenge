@@ -115,7 +115,7 @@ sim_data = pd.DataFrame({
 sim_data
 
 ```
-**Analysis** : Since the coin result is Heads after first flip, Winnings has increased to $45,000 which is a gain of 50% from original value of $30,000. This suggests that it may be profitable to buy-in to the game
+**Analysis** : Since the coin result is Heads after first flip, Winnings has increased to $45,000 which is a gain of 50% from original value of $30,000. Even though this seems to be a profitable outcome, it is not a guarantee as the outcome of the next flip is random and can be tails which will result in a loss. Therefore, it is not a good idea to buy-in to the game based on just a single flip.
 
 
 ### 2) Single Simulation Over Time (Narrative + Plot)
