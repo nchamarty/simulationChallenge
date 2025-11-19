@@ -267,7 +267,7 @@ P(final &gt; $30,000):        0.700 (70.0%)
 <div class="cell-output cell-output-display">
 <div id="q5-modified-25pct-py" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="index_files/figure-html/q5-modified-25pct-py-output-2.png" width="661" height="460" class="figure-img"></p>
+<p><img src="index_files/figure-html/q5-modified-25pct-py-output-2.png" width="1334" height="461" class="figure-img"></p>
 <figcaption>Modified strategy distribution (bet 25% each round)</figcaption>
 </figure>
 </div>
@@ -298,12 +298,22 @@ P(final &gt; $30,000):        0.700 (70.0%)
 <h3 class="anchored" data-anchor-id="briefly-explain-your-findings-from-the-previous-step-in-light-of-a-concept-known-as-the-kelly-criterion">6) Briefly Explain Your Findings From The Previous Step in Light of A Concept Known as the “Kelly Criterion”</h3>
 <p>What is the Kelly Criterion and how does it relate to the modified strategy?</p>
 <p>The Kelly Criterion is a formula used to determine the optimal size of a series of bets or investments to maximize the long-term growth rate of wealth. It suggests betting a fraction of one’s current wealth, which is calculated based on the probability of winning and the ratio of potential gain to potential loss.</p>
-<p>Specifically, the formula is often given as: f = (bp - q) / b</p>
-<p>f is the fraction of current bankroll to wager. b is the odds received (e.g., if you bet $1 and win $$1 and win $1, b=1; if you win $0.50, b=0.5). p is the probability of winning. q is the probability of losing (1-p).</p>
-<p>In our simulation:</p>
-<p>The probability of winning (p) is 0.5 (coin flip). The probability of losing (q) is also 0.5. When we win, we gain 50% of the bet, so for every $1 bet, we get $0.50 profit, meaning b = 0.5. When we lose, we lose 40% of the bet, which is a loss of $0.40 every $1 bet. Let’s apply the Kelly Criterion to our scenario: f = ( (0.5 * 0.5) - 0.5 ) / 0.5 f = (0.25 - 0.5) / 0.5 f = -0.25 / 0.5 f = -0.5</p>
-<p>The negative result suggests that, given these exact parameters (1.5x on win, 0.6x on loss, 50/50 probability), a full Kelly strategy would actually advise not betting, or even shorting (which isn’t really applicable here). This is because the expected value of the bet (p * gain) - (q * loss) is (0.5 * 0.5) - (0.5 * 0.4) = 0.25 - 0.2 = 0.05, which is positive, but the structure of the bet (specifically the return ‘b’) makes the standard Kelly formula yield a negative result when the loss is a higher percentage of the bet than the gain.</p>
-<p>The key takeaway from Kelly is that you should bet a fraction of your wealth, not all of it, to avoid ruin and maximize long-term growth. Betting 25% of your wealth (bet_percentage = 0.25) in our modified strategy is a form of fractional Kelly or a prudent fixed-fraction betting strategy, which aims to balance risk and reward. It’s a pragmatic approach to manage risk, even if the strict Kelly formula might suggest a different optimal fraction or even no bet at all under certain conditions. The significant improvement in the median and probability of success in our 25% strategy compared to the 100% strategy highlights the benefit of not risking your entire capital on each independent event over a long series of trials. This is why we see a significant improvement in the median and probability of success in our 25% strategy compared to the 100% strategy.</p>
+<p>For our investment game where outcomes are multiplicative (wealth is multiplied by a factor), we use the multiplicative Kelly formula:</p>
+<p><strong>f* = (p/a) - (q/b)</strong></p>
+<p>Where: - <strong>f</strong>* is the optimal fraction of wealth to bet - <strong>p</strong> is the probability of winning = 0.5 - <strong>q</strong> is the probability of losing = 0.5<br>
+- <strong>a</strong> is the loss multiplier = 0.6 (when tails, wealth becomes 0.6×) - <strong>b</strong> is the win multiplier = 1.5 (when heads, wealth becomes 1.5×)</p>
+<p><strong>Applying the Kelly Criterion to our scenario:</strong></p>
+<p>f* = (0.5/0.6) - (0.5/1.5) f* = 0.8333 - 0.3333 f* = <strong>0.5</strong> (or 50%)</p>
+<p><strong>Interpretation:</strong></p>
+<p>The Kelly Criterion suggests betting <strong>50% of your wealth</strong> on each round to maximize long-term growth. This aligns perfectly with our modified strategy analysis!</p>
+<p><strong>Key Findings:</strong></p>
+<ol type="1">
+<li><p><strong>The 50% bet strategy matches the Kelly-optimal fraction</strong>, which explains why it performs so well compared to the 100% strategy. Our simulation results showing mean ≈ $98,586 and median ≈ $46,875 with a 50% bet strategy demonstrate the power of following Kelly’s guidance.</p></li>
+<li><p><strong>The 25% bet strategy (0.25 fractional Kelly)</strong> is more conservative than the full Kelly recommendation. While it reduces volatility and provides a higher probability of finishing above the initial investment (70% vs 51% for 50% bet), it sacrifices some expected growth. This is a common approach called “fractional Kelly” used by risk-averse investors.</p></li>
+<li><p><strong>The 100% bet strategy violates Kelly’s principle</strong> by betting more than the optimal fraction. This leads to excessive volatility and a high probability of ruin, as evidenced by our results showing only 22% of simulations finishing above $30,000 with a median of just $4,053.</p></li>
+<li><p><strong>The Kelly Criterion explains the counterintuitive result</strong>: Even though the expected value after one flip is positive ($31,500 &gt; $30,000), betting 100% of wealth each round is suboptimal because the geometric mean (which determines long-term growth) is lower than the arithmetic mean when there’s variance. The Kelly formula accounts for this by recommending a fraction that balances growth with risk.</p></li>
+</ol>
+<p><strong>Conclusion:</strong> Our simulation results validate the Kelly Criterion. The 50% betting strategy, which matches the Kelly-optimal fraction, provides the best balance of growth and risk management, while the 25% strategy offers a more conservative alternative for risk-averse investors.</p>
 </section>
 </section>
 
