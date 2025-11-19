@@ -104,13 +104,24 @@ Figure&nbsp;1: Generative DAG model for the investment game showing how wealth e
 <p>TODO: Explain whether the expected value of your account balance after one flip is &gt;, =, or &lt; $30,000. What is the gain in expected value as a percentage of your buy-in? Does this simple analysis suggest you should buy-in to the game?</p>
 <div id="cell-q1-expected-value-py" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-stdout">
-<pre><code>Coin flip result: Heads (value: 1)
-Initial wealth (W0): $30,000
-Winnings calculation after 1 coin flip:
-Heads: W1 = 1.5 × $30,000 = $45,000.00
+<pre><code>======================================================================
+EXPECTED VALUE AFTER 1 FLIP
+======================================================================
 
-Final winnings after 1 flip: $45,000.00
-Net change: $15,000.00 (+50.00%)</code></pre>
+Initial wealth (W0):                    $30,000
+
+Possible outcomes:
+  Heads (50%): W1 = 1.5 × $30,000 = $45,000.00
+  Tails (50%): W1 = 0.6 × $30,000 = $18,000.00
+
+Expected Value Calculation:
+  E[W1] = P(Heads) × W1_heads + P(Tails) × W1_tails
+  E[W1] = 0.5 × $45,000.00 + 0.5 × $18,000.00
+  E[W1] = $31,500.00
+
+Gain in expected value:                  $1,500.00
+Gain as % of buy-in:                      5.00%
+======================================================================</code></pre>
 </div>
 <div id="q1-expected-value-py" class="cell-output cell-output-display" data-execution_count="3">
 <div>
@@ -120,17 +131,30 @@ Net change: $15,000.00 (+50.00%)</code></pre>
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">sim_num</th>
-<th data-quarto-table-cell-role="th">coin_flip</th>
-<th data-quarto-table-cell-role="th">Winnings</th>
+<th data-quarto-table-cell-role="th">Metric</th>
+<th data-quarto-table-cell-role="th">Value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">0</th>
-<td>1</td>
-<td>1</td>
-<td>45000.0</td>
+<td>Initial Wealth (W0)</td>
+<td>$30,000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Expected Value E[W1]</td>
+<td>$31,500.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Gain</td>
+<td>$1,500.00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Gain %</td>
+<td>5.00%</td>
 </tr>
 </tbody>
 </table>
@@ -138,7 +162,8 @@ Net change: $15,000.00 (+50.00%)</code></pre>
 </div>
 </div>
 </div>
-<p><strong>Analysis</strong> : Since the coin result is Heads after first flip, Winnings has increased to $45,000 which is a gain of 50% from original value of $30,000. Even though this seems to be a profitable outcome, it is not a guarantee as the outcome of the next flip is random and can be tails which will result in a loss. Therefore, it is not a good idea to buy-in to the game based on just a single flip.</p>
+<p><strong>Analysis</strong>: The expected value after one flip is <strong>$31,500</strong>, which is <strong>greater than</strong> the initial investment of $30,000. This represents a gain of <strong>$1,500</strong> or <strong>5%</strong> of the buy-in.</p>
+<p>The one-flip expected value is $31,500, which is $1,500 (5%) above the $30,000 buy-in. This suggests a positive expected return. However, this analysis is limited: It only considers one flip; over 38 years, variance and compounding matter. The 40% loss on tails compounds over time, which can outweigh the positive expectation. It ignores the risk of ruin or ending below the initial investment.</p>
 </section>
 <section id="single-simulation-over-time-narrative-plot" class="level3">
 <h3 class="anchored" data-anchor-id="single-simulation-over-time-narrative-plot">2) Single Simulation Over Time (Narrative + Plot)</h3>
@@ -165,7 +190,6 @@ Number of tails: 22 out of 38 flips</code></pre>
 <ol type="1">
 <li><p>From the above time-series plot of single run every year, over a period of 38 years, the final winnings value is $259.36. This is a significant drop (~99%) than the initial buy-in value of $30,000.</p></li>
 <li><p>Number of heads from the simulation data shows 16 as opposed to 22 tails from total of 38 flips (1 each year) which explains more loss than gain in the winnings.</p></li>
-<li><p>There seems to be more loss than profit beyond 8-year mark. If we really want to give it a go, then it might not be a bad idea to play it for first 8 years where the winnings value reach upto $50,000 which is ~66% gain from initial winning of $30,000</p></li>
 <li><p>Based on above observations, it does not look like a profitable option to play the simulation over a period of 38 years (until the age of 75)</p></li>
 </ol>
 </section>
@@ -187,7 +211,7 @@ P(final &gt; $30,000):        0.220 (22.0%)
 <div class="cell-output cell-output-display">
 <div id="q3-dist-100-py" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="index_files/figure-html/q3-dist-100-py-output-2.png" width="687" height="470" class="figure-img"></p>
+<p><img src="index_files/figure-html/q3-dist-100-py-output-2.png" width="695" height="470" class="figure-img"></p>
 <figcaption>Distribution of final balances across 100 simulations</figcaption>
 </figure>
 </div>

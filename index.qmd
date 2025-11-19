@@ -71,51 +71,57 @@ TODO: Explain whether the expected value of your account balance after one flip 
 import numpy as np
 import pandas as pd
 
-#set seed for reproducability
-np.random.seed(123)
+# Initial wealth
+W0 = 30000
 
-#1. Draw coin flips (stochastic node)
-X=np.random.binomial(n=1, p=0.5, size=1)
+# Probabilities and outcomes
+p_heads = 0.5
+p_tails = 0.5
 
-# Determine coin flip result
-coin_result = "Heads" if X[0] == 1 else "Tails"
-print(f"Coin flip result: {coin_result} (value: {X[0]})")
+# Outcomes after 1 flip
+W1_heads = W0 * 1.5  # Heads: increase by 50%
+W1_tails = W0 * 0.6  # Tails: decrease by 40%
 
-#2. compute winnings (deterministic node)
-W0=30000
-print(f"Initial wealth (W0): ${W0:,}")
+# Calculate Expected Value
+E_W1 = p_heads * W1_heads + p_tails * W1_tails
 
-#W1=np.where(X==1, 1.5*W0, 0.6*W0)
-print('Winnings calculation after 1 coin flip:')
-# Calculate winnings with explicit calculation
-if X[0] == 1:
-    multiplier = 1.5
-    W1 = multiplier * W0
-    print(f"Heads: W1 = {multiplier} × ${W0:,} = ${W1:,.2f}")
-else:
-    multiplier = 0.6
-    W1 = multiplier * W0
-    print(f"Tails: W1 = {multiplier} × ${W0:,} = ${W1:,.2f}")
+# Calculate gain in expected value
+gain = E_W1 - W0
+gain_pct = (gain / W0) * 100
 
-print(f"\nFinal winnings after 1 flip: ${W1:,.2f}")
-print(f"Net change: ${W1 - W0:,.2f} ({(W1/W0 - 1)*100:+.2f}%)")
+# Print results
+print("="*70)
+print("EXPECTED VALUE AFTER 1 FLIP")
+print("="*70)
+print(f"\nInitial wealth (W0):                    ${W0:,}")
+print(f"\nPossible outcomes:")
+print(f"  Heads (50%): W1 = 1.5 × ${W0:,} = ${W1_heads:,.2f}")
+print(f"  Tails (50%): W1 = 0.6 × ${W0:,} = ${W1_tails:,.2f}")
+print(f"\nExpected Value Calculation:")
+print(f"  E[W1] = P(Heads) × W1_heads + P(Tails) × W1_tails")
+print(f"  E[W1] = {p_heads} × ${W1_heads:,.2f} + {p_tails} × ${W1_tails:,.2f}")
+print(f"  E[W1] = ${E_W1:,.2f}")
+print(f"\nGain in expected value:                  ${gain:,.2f}")
+print(f"Gain as % of buy-in:                      {gain_pct:.2f}%")
+print("="*70)
 
-# combine into a dataframe
-
-
-# combine into a dataframe
-sim_data = pd.DataFrame({
-  'sim_num': 1,
-  'coin_flip': X,
-  'Winnings': W1
+# Create comparison dataframe
+comparison = pd.DataFrame({
+    'Metric': ['Initial Wealth (W0)', 'Expected Value E[W1]', 'Gain', 'Gain %'],
+    'Value': [f'${W0:,}', f'${E_W1:,.2f}', f'${gain:,.2f}', f'{gain_pct:.2f}%']
 })
 
-#Display Results
-#print ('Here is Expected Value of Winning after 1 flip')
-sim_data
+comparison
 
 ```
-**Analysis** : Since the coin result is Heads after first flip, Winnings has increased to $45,000 which is a gain of 50% from original value of $30,000. Even though this seems to be a profitable outcome, it is not a guarantee as the outcome of the next flip is random and can be tails which will result in a loss. Therefore, it is not a good idea to buy-in to the game based on just a single flip.
+
+**Analysis**: The expected value after one flip is **$31,500**, which is **greater than** the initial investment of $30,000. This represents a gain of **$1,500** or **5%** of the buy-in. 
+
+The one-flip expected value is $31,500, which is $1,500 (5%) above the $30,000 buy-in. This suggests a positive expected return.
+However, this analysis is limited:
+It only considers one flip; over 38 years, variance and compounding matter.
+The 40% loss on tails compounds over time, which can outweigh the positive expectation.
+It ignores the risk of ruin or ending below the initial investment.
 
 
 ### 2) Single Simulation Over Time (Narrative + Plot)
@@ -195,9 +201,7 @@ plt.show()
 
 2. Number of heads from the simulation data shows 16 as opposed to 22 tails from total of 38 flips (1 each year) which explains more loss than gain in the winnings.
 
-3. There seems to be more loss than profit beyond 8-year mark. If we really want to give it a go, then it might not be a bad idea to play it for first 8 years where the winnings value reach upto $50,000 which is ~66% gain from initial winning of $30,000
-
-4. Based on above observations, it does not look like a profitable option to play the simulation over a period of 38 years (until the age of 75) 
+3. Based on above observations, it does not look like a profitable option to play the simulation over a period of 38 years (until the age of 75) 
 
 
 ### 3) 100 Simulations: Distribution of Final Balances
@@ -265,67 +269,73 @@ print("="*70)
 # Create matplotlib OO histogram plot
 fig, ax = plt.subplots(figsize=(7, 5))
 
-# Create histogram
-n_bins = 30
-n, bins, patches = ax.hist(final_balances, bins=n_bins, edgecolor='black', 
-                           alpha=0.7, color='steelblue', linewidth=1.2)
+# Create custom bins with more granularity in the lower range
+# Focus on $0-$10,000 where median (~$4,053) and most data lies
+# Use fewer but wider bins to make bars more visible
+
+# More bins in $0-$10,000 range (where median is) - reduced for visibility
+bins_0_to_10k = np.linspace(0, 10000, 25)  # 25 bins in first $10k (wider bars)
+
+# Medium granularity in $10k-$30k range
+bins_10k_to_30k = np.linspace(10000, W0, 20)  # 20 bins from $10k to $30k
+
+# Fewer bins above $30k (outliers)
+bins_above_30k = np.linspace(W0, max_final * 1.05, 12)  # 12 bins above $30k
+
+# Combine all bins, removing duplicates
+custom_bins = np.concatenate([bins_0_to_10k, bins_10k_to_30k[1:], bins_above_30k[1:]])
+
+# Create histogram with custom bins - thinner edge for better visibility
+n, bins, patches = ax.hist(final_balances, bins=custom_bins, edgecolor='black', 
+                           alpha=0.75, color='steelblue', linewidth=0.5)
 
 # Color bars based on whether they're above or below initial investment
+# Make red bars more visible with higher opacity
 for i, (bar, bin_left) in enumerate(zip(patches, bins[:-1])):
     if bin_left >= W0:
         bar.set_facecolor('green')
         bar.set_alpha(0.6)
     else:
         bar.set_facecolor('red')
-        bar.set_alpha(0.6)
+        bar.set_alpha(0.85)  # Higher opacity for red bars to make them more visible
 
 # Add vertical line at initial investment ($30,000) - make it prominent
 ax.axvline(x=W0, color='darkblue', linestyle='--', linewidth=3, 
            label=f'Initial Investment (${W0:,})', zorder=5, alpha=0.9)
 
+# Add vertical line at median to highlight it
+ax.axvline(x=median_final, color='purple', linestyle=':', linewidth=2.5, 
+           label=f'Median (${median_final:,.0f})', zorder=5, alpha=0.8)
+
 # Formatting
-ax.set_xlabel('Final Account Balance ($)', fontsize=10, fontweight='bold')
-ax.set_ylabel('Frequency (Number of Simulations)', fontsize=10, fontweight='bold')
+ax.set_xlabel('Final Account Balance ($)', fontsize=12, fontweight='bold')
+ax.set_ylabel('Frequency (Number of Simulations)', fontsize=12, fontweight='bold')
 ax.set_title(f'Distribution of Final Balances: {n_simulations} Simulations Over {years} Years', 
              fontsize=14, fontweight='bold')
 ax.grid(True, alpha=0.3, linestyle='--', axis='y')
 
-# Format x-axis to show full numbers (no exponential notation)
-ax.ticklabel_format(style='plain', axis='x', useOffset=False)
-ax.xaxis.set_major_formatter(FuncFormatter(lambda x, p: f'${x:,.0f}'))
-
-# Set x-axis ticks to show reasonable range with full numbers
-# Get the data range and set ticks appropriately
-x_min = max(0, min_final * 0.9)
-x_max = max_final * 1.1
+# Set x-axis limits
+x_min = 0
+x_max = max_final * 1.05
 ax.set_xlim(x_min, x_max)
-plt.setp(ax.get_xticklabels(), rotation=30, ha="right", rotation_mode="anchor")
-# Set custom tick locations to avoid exponential notation
-# Calculate reasonable tick locations
-tick_range = x_max - x_min
-if tick_range < 1000:
-    step = 100
-elif tick_range < 10000:
-    step = 1000
-elif tick_range < 100000:
-    step = 10000
-else:
-    step = max(10000, int(tick_range / 10))
 
-tick_locations = np.arange(0, x_max + step, step)
+# Create tick marks with more granularity in lower range
+# Focus on $0-$10k range where median lies
+ticks_0_to_10k = np.linspace(0, 10000, 6)  # 6 ticks from 0 to 10,000
+ticks_10k_to_30k = np.linspace(10000, W0, 5)  # 5 ticks from 10k to 30k
+ticks_above_30k = np.linspace(W0, x_max, 6)  # 6 ticks above 30k
+# Combine and remove duplicates
+tick_locations = np.concatenate([ticks_0_to_10k, ticks_10k_to_30k[1:], ticks_above_30k[1:]])
 ax.set_xticks(tick_locations)
 
-# Apply formatter that ensures no scientific notation
-formatter = ScalarFormatter(useMathText=False)
-formatter.set_scientific(False)
-ax.xaxis.set_major_formatter(formatter)
-# Then apply currency formatting on top
+# Format x-axis with currency and rotate labels for readability
 ax.xaxis.set_major_formatter(FuncFormatter(lambda x, p: f'${x:,.0f}' if x >= 0 else ''))
+plt.setp(ax.get_xticklabels(), rotation=45, ha='right', fontsize=9)
 
 # Add text box with key statistics
 stats_text = f'Mean: ${mean_final:,.0f}\nMedian: ${median_final:,.0f}\nP(>${W0:,}): {prob_above_initial:.3f}'
-ax.text(0.98, 0.85, stats_text, transform=ax.transAxes, 
-        fontsize=8, verticalalignment='top', horizontalalignment='right',
+ax.text(0.98, 0.98, stats_text, transform=ax.transAxes, 
+        fontsize=10, verticalalignment='top', horizontalalignment='right',
         bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.9),
         fontweight='bold')
 
