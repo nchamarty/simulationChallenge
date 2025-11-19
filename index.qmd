@@ -487,7 +487,7 @@ print(f"P(final > ${W0:,}):        {prob_above_initial_modified:.3f} ({prob_abov
 print("="*70)
 
 # --- Visual Comparison Plot ---
-fig, axes = plt.subplots(1, 2, figsize=(14, 5), sharey=True) # Two subplots, shared y-axis
+fig, axes = plt.subplots(1, 2, figsize=(9, 6), sharey=True) # Two subplots, shared y-axis
 
 # Helper function to create histogram with centered $30,000 (like q3-dist-100-py)
 def create_centered_histogram(ax, data, title, mean_val, median_val, W0):
